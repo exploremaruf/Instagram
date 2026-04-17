@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Background (240dp card) -->
+    <item>
+        <shape android:shape="rectangle">
+            <size
+                android:width="240dp"
+                android:height="240dp"/>
+            <!-- optional background color -->
+            <solid android:color="@android:color/white"/>
+        </shape>
+    </item>
+
+    <!-- Center image (160dp) -->
+    <item
+        android:drawable="@drawable/instagram_glyph_gradient"
+        android:top="40dp"
+        android:bottom="40dp"
+        android:left="40dp"
+        android:right="40dp"
+        android:gravity="center"/>
+
+</layer-list>
