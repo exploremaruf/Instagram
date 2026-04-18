@@ -1,0 +1,19 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item>
+        <drawable android:drawable="@color/ig_splash_screen_background" />
+    </item>
+
+    <item android:bottom="112dp">
+        <bitmap
+            android:gravity="center"
+            android:src="@drawable/instagram" />
+    </item>
+
+    <item android:bottom="80dp">
+        <bitmap
+            android:gravity="bottom"
+            android:src="@drawable/from_meta_gradient" />
+    </item>
+
+</layer-list>
