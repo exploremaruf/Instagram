@@ -1,15 +1,14 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base Theme -->
     <style name="Base.Theme.Instagram" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your main theme here -->
     </style>
 
-    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">#FFFFFF</item>
-
-        <item name="windowSplashScreenAnimatedIcon">@drawable/splash_icon</item>
-
-
-        <item name="postSplashScreenTheme">@style/Theme.Instagram</item>
-    </style>
-
+    <!-- Main App Theme -->
     <style name="Theme.Instagram" parent="Base.Theme.Instagram" />
+
+    <!-- Splash Screen Theme -->
+
+
 </resources>

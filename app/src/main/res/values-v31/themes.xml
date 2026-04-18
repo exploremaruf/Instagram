@@ -1,0 +1,25 @@
+<resources>
+
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+
+        <!-- Background -->
+        <item name="android:windowSplashScreenBackground">@color/white</item>
+
+        <!-- Center icon -->
+        <item name="android:windowSplashScreenAnimatedIcon">@mipmap/ic_channel_foreground</item>
+
+        <!-- Animation time -->
+        <item name="android:windowSplashScreenAnimationDuration">1000</item>
+
+        <!-- Icon background -->
+        <item name="android:windowSplashScreenIconBackgroundColor">@color/white</item>
+
+        <!-- Branding (optional) -->
+        <item name="android:windowSplashScreenBrandingImage">@mipmap/from_meta_foreground</item>
+
+        <!-- Main theme -->
+        <item name="postSplashScreenTheme">@style/Theme.Instagram</item>
+
+    </style>
+
+</resources>
