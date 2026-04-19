@@ -2,63 +2,153 @@ package com.penguinlabs.instagram;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link HomeFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+
 public class HomeFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    RecyclerView recyclerview;
+    HashMap<String, String> hashMap;
+    ArrayList<HashMap<String, String>> arrayList;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public HomeFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment HomeFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static HomeFragment newInstance(String param1, String param2) {
-        HomeFragment fragment = new HomeFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        //view binding
+        recyclerview = view.findViewById(R.id.recyclerview);
+        arrayList = new ArrayList<>();
+        recyclerview.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getContext());
+
+        String url = "";
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray jsonArray) {
+
+                Log.d("serverresponse", "" + jsonArray);
+
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    try {
+                        JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                        hashMap = new HashMap<>();
+                        hashMap.put("username", "username");
+                        hashMap.put("userprofile", "userprofile");
+                        arrayList.add(hashMap);
+
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+
+                    }
+
+
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+
+                Log.d("responseerror", "" + volleyError);
+
+            }
+        });
+
+        requestQueue.add(jsonArrayRequest);
+
+        StoryAdapter storyAdapter = new StoryAdapter();
+        recyclerview.setAdapter(storyAdapter);
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        return view;
+
     }
+
+
+    //adapter
+    public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.Viewholder> {
+
+
+        @NonNull
+        @Override
+        public Viewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            LayoutInflater layoutInflater = getLayoutInflater();
+            View view = layoutInflater.inflate(R.layout.card_story, parent, false);
+
+            return new Viewholder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull Viewholder holder, int position) {
+
+            hashMap = arrayList.get(position);
+
+            String name = hashMap.get("username");
+            String image = hashMap.get("userprofile");
+
+            holder.username.setText(name);
+
+            Glide.with(getContext()).load(image).into(holder.profileimage);
+
+
+        }
+
+        @Override
+        public int getItemCount() {
+            return arrayList.size();
+        }
+
+        //viewholder
+        class Viewholder extends RecyclerView.ViewHolder {
+
+            ImageView profileimage;
+            TextView username;
+
+
+            public Viewholder(@NonNull View itemView) {
+                super(itemView);
+
+                profileimage = itemView.findViewById(R.id.profileImage);
+                username = itemView.findViewById(R.id.userName);
+
+
+            }
+        }
+
+
+    }
+
+
 }
