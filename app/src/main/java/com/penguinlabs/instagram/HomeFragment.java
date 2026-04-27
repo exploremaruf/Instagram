@@ -33,7 +33,7 @@ import java.util.HashMap;
 
 public class HomeFragment extends Fragment {
 
-    RecyclerView recyclerview;
+    RecyclerView storyrecyclerview;
     HashMap<String, String> hashMap;
     ArrayList<HashMap<String, String>> arrayList;
 
@@ -44,9 +44,9 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         //view binding
-        recyclerview = view.findViewById(R.id.recyclerview);
+        storyrecyclerview = view.findViewById(R.id.storyrecyclerview);
         arrayList = new ArrayList<>();
-        recyclerview.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        storyrecyclerview.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
 
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
 
@@ -89,7 +89,7 @@ public class HomeFragment extends Fragment {
         requestQueue.add(jsonArrayRequest);
 
         StoryAdapter storyAdapter = new StoryAdapter();
-        recyclerview.setAdapter(storyAdapter);
+        storyrecyclerview.setAdapter(storyAdapter);
 
         // Inflate the layout for this fragment
         return view;
