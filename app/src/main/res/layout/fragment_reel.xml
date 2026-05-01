@@ -3,16 +3,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".HomeFragment"
-    android:background="#FFEB3B">
-    <TextView
+    android:background="#FFFFFF">
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Reels Fragment"
-        android:textAlignment="center"
-        android:textSize="50sp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:orientation="vertical"
+        android:gravity="center">
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/edits_splash_a10_2e_light_mode"
 
-        />
+
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Looks like there’s nothing here yet"
+            android:layout_marginTop="8dp"
+            android:textSize="16sp"
+            android:textColor="#888888"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif"
+            />
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start exploring"
+            app:cornerRadius="5dp"
+            android:backgroundTint="#4DA6FF"
+            android:layout_marginTop="8dp"
+            android:textSize="14sp"
+            android:fontFamily="sans-serif-medium"
+            />
+
+
+    </LinearLayout>
 
 
 </RelativeLayout>
