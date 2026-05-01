@@ -34,12 +34,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Start exploring"
-            app:cornerRadius="5dp"
-            android:backgroundTint="#4DA6FF"
+            android:textColor="#FFFFFF"
+            android:textAllCaps="false"
+            app:cornerRadius="6dp"
+            android:backgroundTint="#0095F6"
+            app:rippleColor="#33FFFFFF"
+            android:elevation="2dp"
             android:layout_marginTop="8dp"
             android:textSize="14sp"
             android:fontFamily="sans-serif-medium"
-            />
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="8dp"/>
 
 
     </LinearLayout>
